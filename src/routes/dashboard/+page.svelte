@@ -120,19 +120,19 @@
 			{#each ventures as venture (venture.name)}
 				{#if venture.href}
 					<a
-						class="venture-card venture-card--link"
+						class="venture-card venture-card--link lift-card"
 						href={resolve(localizeHref(venture.href) as Pathname)}
 					>
 						{@render ventureCardContent(venture)}
 					</a>
 				{:else}
-					<article class="venture-card">
+					<article class="venture-card lift-card">
 						{@render ventureCardContent(venture)}
 					</article>
 				{/if}
 			{/each}
 
-			<article class="own-idea-card">
+			<article class="own-idea-card lift-card">
 				<div class="own-idea-card__heading">
 					<h2>{m.dashboard_my_own_idea()}</h2>
 					<p>{m.dashboard_my_own_idea_intro()}</p>
@@ -193,23 +193,6 @@
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 20px;
-	}
-
-	.venture-card,
-	.own-idea-card {
-		background: #fff;
-		border: 1px solid rgba(17, 17, 17, 0.14);
-		transition:
-			box-shadow 0.2s,
-			transform 0.2s,
-			border-color 0.2s;
-	}
-
-	.venture-card:hover,
-	.own-idea-card:hover {
-		border-color: rgba(17, 17, 17, 0.08);
-		box-shadow: 0 12px 28px rgba(17, 17, 17, 0.09);
-		transform: translateY(-2px);
 	}
 
 	.venture-card {
