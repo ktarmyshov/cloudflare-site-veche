@@ -77,16 +77,16 @@ jobs:
           run-script: |
             npm run build
 
-      - id: changesets
-        uses: changesets/action@v2
-        with:
-          version-script: npm run changeset:version
-          publish-script: npm run changeset:publish
-          create-github-releases: true
-          github-token: ${{ steps.app-token.outputs.token }}
+      # - id: changesets
+      #   uses: changesets/action@v2
+      #   with:
+      #     version-script: npm run changeset:version
+      #     publish-script: npm run changeset:publish
+      #     create-github-releases: true
+      #     github-token: ${{ steps.app-token.outputs.token }}
 
-      - if: ${{ steps.changesets.outputs.published == 'true' }}
-        name: Cloudflare deploy
+      - name: Cloudflare deploy
+        # if: ${{ steps.changesets.outputs.published == 'true' }}
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
