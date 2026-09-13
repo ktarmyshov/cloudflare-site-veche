@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import type { Pathname } from '$app/types';
-	import barefootStoreImage from '$lib/assets/images/barefoot-store.png';
-	import herbalPharmacyImage from '$lib/assets/images/herbal-pharmacy.png';
+	import barefootStoreImage from '$lib/assets/images/barefoot-store.jpg';
+	import herbalPharmacyImage from '$lib/assets/images/herbal-pharmacy.jpg';
 	import ogImage from '$lib/assets/images/og-image.jpg';
-	import rabiaImage from '$lib/assets/images/rabia.png';
+	import rabiaImage from '$lib/assets/images/rabia.jpg';
 	import DatabaseEntryCard from '$lib/components/DatabaseEntryCard.svelte';
 	import { m } from '$lib/paraglide/messages.js';
 	import { localizeHref } from '$lib/paraglide/runtime';

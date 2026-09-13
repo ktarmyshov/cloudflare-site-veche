@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import type { Pathname } from '$app/types';
-	import herbalPharmacyImage from '$lib/assets/images/herbal-pharmacy.png';
+	import herbalPharmacyImage from '$lib/assets/images/herbal-pharmacy.jpg';
 	import SplitHero from '$lib/components/SplitHero.svelte';
 	import { m } from '$lib/paraglide/messages.js';
 	import { localizeHref } from '$lib/paraglide/runtime';

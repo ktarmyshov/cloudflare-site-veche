@@ -4,6 +4,12 @@
 - **Package Manager**: npm
 - **Add-ons**: prettier, eslint, vitest, playwright, tailwindcss, sveltekit-adapter, paraglide, ai-tools
 
+## Validation Workflow
+
+- Do not run `npm run format`, `npm run lint`, `npm run check`, or `npm run build` unless the user explicitly asks you to.
+- After making code changes, remind the user to run these checks locally and review their output.
+- If the user provides failing output, use it to diagnose and fix the issues.
+
 ---
 
 You are able to use the Svelte MCP server, where you have access to comprehensive Svelte 5 and SvelteKit documentation. Here's how to use the available tools effectively:

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import type { Pathname } from '$app/types';
-	import rabiaImage from '$lib/assets/images/rabia.png';
+	import rabiaImage from '$lib/assets/images/rabia.jpg';
 	import SplitHero from '$lib/components/SplitHero.svelte';
 	import { m } from '$lib/paraglide/messages.js';
 	import { localizeHref } from '$lib/paraglide/runtime';
