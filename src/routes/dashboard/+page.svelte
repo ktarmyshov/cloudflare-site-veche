@@ -1,9 +1,12 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+	import type { Pathname } from '$app/types';
 	import barefootStoreImage from '$lib/assets/images/barefoot-store.png';
 	import herbalPharmacyImage from '$lib/assets/images/herbal-pharmacy.png';
 	import rabiaImage from '$lib/assets/images/rabia.png';
 	import PhaseGrid from '$lib/components/PhaseGrid.svelte';
 	import { m } from '$lib/paraglide/messages.js';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	type PhaseState = 'completed' | 'current' | 'future';
 
@@ -20,6 +23,7 @@
 		imageAlt: string;
 		currentPhase: string;
 		phases: readonly VenturePhase[];
+		href?: Pathname;
 	};
 
 	const ventures: readonly DashboardVenture[] = [
@@ -47,6 +51,7 @@
 			image: barefootStoreImage,
 			imageAlt: m.home_database_barefoot_image_alt(),
 			currentPhase: 'Demand',
+			href: '/dashboard/barefoot-store',
 			phases: [
 				{ name: 'Discover', count: 4, state: 'completed' },
 				{ name: 'Concept', count: 2, state: 'completed' },
@@ -78,6 +83,27 @@
 	];
 </script>
 
+{#snippet ventureCardContent(venture: DashboardVenture)}
+	<img class="venture-card__image" src={venture.image} alt={venture.imageAlt} />
+
+	<div class="venture-card__body">
+		<div class="venture-card__heading">
+			<h2>{venture.name}</h2>
+			<p>{venture.subtitle}</p>
+		</div>
+
+		<p class="venture-card__current-phase">
+			<span>{m.dashboard_current_phase()}</span>
+			{venture.currentPhase}
+		</p>
+
+		<div class="venture-card__phases">
+			<p>{m.dashboard_selected_experiments()}</p>
+			<PhaseGrid phases={venture.phases} />
+		</div>
+	</div>
+{/snippet}
+
 <svelte:head>
 	<title>{m.dashboard_meta_title()}</title>
 	<meta name="description" content={m.dashboard_meta_description()} />
@@ -92,26 +118,18 @@
 
 		<div class="dashboard__grid">
 			{#each ventures as venture (venture.name)}
-				<article class="venture-card">
-					<img class="venture-card__image" src={venture.image} alt={venture.imageAlt} />
-
-					<div class="venture-card__body">
-						<div class="venture-card__heading">
-							<h2>{venture.name}</h2>
-							<p>{venture.subtitle}</p>
-						</div>
-
-						<p class="venture-card__current-phase">
-							<span>{m.dashboard_current_phase()}</span>
-							{venture.currentPhase}
-						</p>
-
-						<div class="venture-card__phases">
-							<p>{m.dashboard_selected_experiments()}</p>
-							<PhaseGrid phases={venture.phases} />
-						</div>
-					</div>
-				</article>
+				{#if venture.href}
+					<a
+						class="venture-card venture-card--link"
+						href={resolve(localizeHref(venture.href) as Pathname)}
+					>
+						{@render ventureCardContent(venture)}
+					</a>
+				{:else}
+					<article class="venture-card">
+						{@render ventureCardContent(venture)}
+					</article>
+				{/if}
 			{/each}
 
 			<article class="own-idea-card">
@@ -181,12 +199,33 @@
 	.own-idea-card {
 		background: #fff;
 		border: 1px solid rgba(17, 17, 17, 0.14);
+		transition:
+			box-shadow 0.2s,
+			transform 0.2s,
+			border-color 0.2s;
+	}
+
+	.venture-card:hover,
+	.own-idea-card:hover {
+		border-color: rgba(17, 17, 17, 0.08);
+		box-shadow: 0 12px 28px rgba(17, 17, 17, 0.09);
+		transform: translateY(-2px);
 	}
 
 	.venture-card {
 		display: grid;
 		grid-template-columns: minmax(150px, 31%) 1fr;
 		min-width: 0;
+	}
+
+	.venture-card--link {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.venture-card--link:focus-visible {
+		outline: 3px solid rgba(200, 51, 43, 0.45);
+		outline-offset: 3px;
 	}
 
 	.venture-card__image {

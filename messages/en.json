@@ -99,5 +99,18 @@
 	"dashboard_validation_methods": "validation methods",
 	"dashboard_method_categories": "method categories",
 	"dashboard_venture_types": "venture types",
-	"dashboard_pathway_not_selected": "Pathway not selected yet"
+	"dashboard_pathway_not_selected": "Pathway not selected yet",
+	"dashboard_barefoot_meta_title": "Barefoot Store validation pathway - veche.design",
+	"dashboard_back_to_dashboard": "Back to dashboard",
+	"dashboard_completed": "Completed",
+	"dashboard_current": "Current",
+	"dashboard_future": "Future",
+	"dashboard_experiment": "experiment",
+	"dashboard_experiments": "experiments",
+	"dashboard_your_result": "Your result",
+	"dashboard_benchmark": "Benchmark",
+	"dashboard_evidence_comparison_label": "Result and benchmark comparison",
+	"dashboard_illustrative_benchmark": "Illustrative benchmark",
+	"dashboard_results_not_available": "Results not available yet",
+	"dashboard_illustrative_data_note": "Result and benchmark values shown here are illustrative prototype data."
 }
