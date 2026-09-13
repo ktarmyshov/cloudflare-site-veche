@@ -2,10 +2,12 @@
 	import { resolve } from '$app/paths';
 	import type { Pathname } from '$app/types';
 	import barefootStoreImage from '$lib/assets/images/barefoot-store.png';
+	import frankfurtImage from '$lib/assets/images/frankfurt.jpg';
 	import herbalPharmacyImage from '$lib/assets/images/herbal-pharmacy.png';
 	import ogImage from '$lib/assets/images/og-image.jpg';
 	import rabiaImage from '$lib/assets/images/rabia.png';
 	import DatabaseEntryCard from '$lib/components/DatabaseEntryCard.svelte';
+	import SplitHero from '$lib/components/SplitHero.svelte';
 	import { m } from '$lib/paraglide/messages.js';
 	import { localizeHref } from '$lib/paraglide/runtime';
 
@@ -32,28 +34,34 @@
 	<meta name="twitter:image" content={ogImageUrl} />
 </svelte:head>
 
-<section class="hero">
-	<div class="hero-left">
-		<h1>{m.home_hero_title()}</h1>
+{#snippet homeHeroTitle()}
+	<h1 class="home-hero-title">{m.home_hero_title()}</h1>
+{/snippet}
 
-		<p class="hero-sub">
-			<strong>{m.home_hero_sub_lead()}</strong>
-			{m.home_hero_sub_rest()}
-		</p>
+{#snippet homeHeroDescription()}
+	<p class="home-hero-sub">
+		<strong>{m.home_hero_sub_lead()}</strong>
+		{m.home_hero_sub_rest()}
+	</p>
+{/snippet}
 
-		<div class="hero-cta">
-			<a href={databaseHref} class="btn btn-outline">
-				{m.cta_explore_tested_businesses()}
-			</a>
+{#snippet homeHeroActions()}
+	<a href={databaseHref} class="btn btn-outline">
+		{m.cta_explore_tested_businesses()}
+	</a>
 
-			<a href={dashboardHref} class="btn btn-outline">
-				{m.home_hero_test_business()}
-			</a>
-		</div>
-	</div>
+	<a href={dashboardHref} class="btn btn-outline">
+		{m.home_hero_test_business()}
+	</a>
+{/snippet}
 
-	<div class="hero-right"></div>
-</section>
+<SplitHero
+	title={homeHeroTitle}
+	description={homeHeroDescription}
+	actions={homeHeroActions}
+	image={frankfurtImage}
+	imageAlt=""
+/>
 
 <section class="problem">
 	<div class="problem-head">
@@ -216,3 +224,26 @@
 		</a>
 	</div>
 </section>
+
+<style>
+	.home-hero-title {
+		max-width: 620px;
+		font-size: clamp(1.4rem, 3vw, 2.6rem);
+		font-weight: 900;
+		letter-spacing: -0.015em;
+		line-height: 1.18;
+		text-transform: uppercase;
+	}
+
+	.home-hero-sub {
+		max-width: 560px;
+		color: rgba(255, 255, 255, 0.9);
+		font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+		line-height: 1.6;
+	}
+
+	.home-hero-sub strong {
+		color: #fff;
+		font-weight: 800;
+	}
+</style>
